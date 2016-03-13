@@ -70,16 +70,10 @@ namespace Task2.Tests
         [Test]
         [TestCase(15, 45, 3, 15, Result = 3)]
         [TestCase(5, 45, 5, 1, 5, Result = 1)]
+        [TestCase(5, Result = 5)]
         public int SteinMethodTest_Params(params int[] data)
         {
             return GreatestCommonDivisor.SteinMethod(data);
-        }
-        [Test]
-        [TestCase(3)]
-        [ExpectedException(typeof(ArgumentException))]
-        public void SteinMethodTest_ExceptionOneArgument(params int[] a)
-        {
-            Assert.AreEqual(GreatestCommonDivisor.EuclideanMethod(a), 0);
         }
 
     }
