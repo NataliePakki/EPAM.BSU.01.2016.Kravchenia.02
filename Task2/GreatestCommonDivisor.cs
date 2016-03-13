@@ -13,7 +13,7 @@ namespace Task2 {
         }
         public static int EuclideanMethod(int a, int b) {
             if (a == 0 && b == 0)
-                throw new ArgumentException("");
+                throw new ArgumentException("Two arguments must not be zero");
             return b > a ? GcdEuclide(b, a) : GcdEuclide(a, b);
         }
 
