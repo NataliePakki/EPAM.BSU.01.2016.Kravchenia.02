@@ -5,7 +5,7 @@ namespace Task2.Tests
 {
     [TestFixture]
     public class GreatestCommonDivisorTests {
-        private TimeSpan _time;
+        private double _time;
         [Test]
         [TestCase(27, 9,Result = 9)]
         [TestCase(27,0, Result = 27)]
@@ -45,7 +45,7 @@ namespace Task2.Tests
         }
         [Test]
         [TestCase(15, 45, 3, 15, Result = 3)]
-        [TestCase(5, 45, 5, 1, 5, Result = 1)]
+        [TestCase(1949, 2549, 3461, 1093, 3571, Result = 1)]
         public int SteinMethodTest_Params(params int[] data){
             return GreatestCommonDivisor.SteinMethod(out _time, data);
         }

@@ -3,12 +3,12 @@ using System.Diagnostics;
 
 namespace Task2 {
     public static class GreatestCommonDivisor {
-        public static int EuclideanMethod(out TimeSpan time,int a, int b) {
+        public static int EuclideanMethod(out double time,int a, int b) {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             int gcd = EuclideanMethod(a, b);
             stopWatch.Stop();
-            time = stopWatch.Elapsed;
+            time = stopWatch.ElapsedMilliseconds;
             return gcd;
         }
         public static int EuclideanMethod(int a, int b) {
@@ -17,12 +17,25 @@ namespace Task2 {
             return b > a ? GcdEuclide(b, a) : GcdEuclide(a, b);
         }
 
-        public static int EuclideanMethod(out TimeSpan time, params int[] values) {
+        public static int EuclideanMethod(out double time, int a, int b, int c) {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            int gcd = EuclideanMethod(a, b, c);
+            stopWatch.Stop();
+            time = stopWatch.ElapsedMilliseconds;
+            return gcd;
+        }
+
+        public static int EuclideanMethod(int a, int b, int c) {
+            return EuclideanMethod(a,EuclideanMethod(b,c));
+        }
+
+        public static int EuclideanMethod(out double time, params int[] values) {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             int gcd = EuclideanMethod(values);
             stopWatch.Stop();
-            time = stopWatch.Elapsed;
+            time = stopWatch.ElapsedMilliseconds;
             return gcd;
         }
 
@@ -34,15 +47,14 @@ namespace Task2 {
                 result = EuclideanMethod(values[i], result);
             }
             return result;
-
         }
 
-        public static int SteinMethod(out TimeSpan time, int a, int b) {
+        public static int SteinMethod(out double time, int a, int b) {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             int gcd = SteinMethod(a, b);
             stopWatch.Stop();
-            time = stopWatch.Elapsed;
+            time = stopWatch.ElapsedMilliseconds;
             return gcd;
         }
 
@@ -52,12 +64,25 @@ namespace Task2 {
             return GcdStein(a, b);
         }
 
-        public static int SteinMethod(out TimeSpan time, params int[] values) {
+        public static int SteinMethod(out double time, int a, int b, int c) {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            int gcd = SteinMethod(a, b, c);
+            stopWatch.Stop();
+            time = stopWatch.ElapsedMilliseconds;
+            return gcd;
+        }
+
+        public static int SteinMethod(int a, int b, int c) {
+            return SteinMethod(a,SteinMethod(b,c));
+        }
+
+        public static int SteinMethod(out double time, params int[] values) {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             int gcd = SteinMethod(values);
             stopWatch.Stop();
-            time = stopWatch.Elapsed;
+            time = stopWatch.ElapsedMilliseconds;
             return gcd;
         }
 
