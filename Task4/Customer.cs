@@ -17,24 +17,22 @@ namespace Task4 {
         
         public string ToString(string format, IFormatProvider formatProvider) {
             if (String.IsNullOrEmpty(format)) format = "g";
-            if (formatProvider != null){
-                var fmt = formatProvider.GetFormat(GetType()) as ICustomFormatter;
-                if (fmt != null) { return fmt.Format(null, this, formatProvider); }
-            }
-             switch (format.ToLower()){
+            var fmt = formatProvider?.GetFormat(GetType()) as ICustomFormatter;
+            if (fmt != null) { return fmt.Format(null, this, formatProvider); }
+            switch (format.ToLower()){
                  case "g":
                  case "name phone recenue":
-                     return String.Format("Customer record: {0}, {1}, {2}", Name, ContactPhone, Recenue);
+                     return $"Customer record: {Name}, {ContactPhone}, {Recenue}";
                  case "name":
-                     return String.Format("Customer record: {0}", Name);
+                     return $"Customer record: {Name}";
                  case "name phone":
-                     return String.Format("Customer record: {0}, {1}", Name, ContactPhone);
+                     return $"Customer record: {Name}, {ContactPhone}";
                  case "phone":
-                     return String.Format("Customer record: {0}", ContactPhone);
+                     return $"Customer record: {ContactPhone}";
                  case "recenue":
-                     return String.Format("Customer record: {0}", Recenue);
+                     return $"Customer record: {Recenue}";
                  default:
-                     throw new FormatException(String.Format("The '{0}' format string is not supported.", format));
+                     throw new FormatException($"The '{format}' format string is not supported.");
              }
         }
         public string ToString(IFormatProvider formatProvider) {

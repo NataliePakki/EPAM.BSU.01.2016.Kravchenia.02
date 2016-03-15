@@ -1,21 +1,11 @@
 ﻿using System;
+using System.Globalization;
 using NUnit.Framework;
 
 namespace Task4.Tests {
     public class CustomerTests {
-        private Customer cust = new Customer("John", "+375-17-4341283", 10000);
-        private class TestFormatProvider : IFormatProvider, ICustomFormatter
-        {
-            public string Format(string format, object arg, IFormatProvider formatProvider){
-                Customer t = arg as Customer;
-                if (t == null) { return arg.ToString(); }
-                return "Customer record: " + t.ContactPhone + ", " + t.Name + ", " + t.Recenue;
-            }
-
-            public object GetFormat(Type formatType){
-                return (formatType == typeof(Customer)) ? this : null;
-            }
-        }
+        private readonly Customer cust = new Customer("John", "+375-17-4341283", 10000);
+       
 
         [Test]
         [TestCase(Result = "Customer record: John, +375-17-4341283, 10000")]
@@ -25,9 +15,10 @@ namespace Task4.Tests {
 
         [Test]
         [TestCase(Result = "Customer record: +375-17-4341283, John, 10000")]
-        public string CustomerToStringTest_AnotherFormat() {
-            return cust.ToString(new TestFormatProvider());
+        public string CustomerToStringTest_CustomerFormatProvider() {
+            return cust.ToString(new CustomerFormatProvider());
         }
+
 
         [Test]
         [TestCase(Result = "Customer record: John, +375-17-4341283")]
