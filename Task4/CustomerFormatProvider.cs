@@ -4,19 +4,29 @@ using System.Globalization;
 namespace Task4
 {
     public class CustomerFormatProvider : IFormatProvider, ICustomFormatter {
-        private IFormatProvider _parent;
-        public CustomerFormatProvider(): this(CultureInfo.CurrentCulture) { }
+        private readonly IFormatProvider _parent;
+        public CustomerFormatProvider(): this(new  CultureInfo("en-US")) { }
         public CustomerFormatProvider(IFormatProvider parent) {
             _parent = parent;
         }
         public string Format(string format, object arg, IFormatProvider formatProvider){
-           Customer t = arg as Customer;
-           if(t == null) { return arg.ToString(); }
-           return "Customer record: " + t.ContactPhone + ", " + t.Name + ", " + t.Recenue;
+            if(format == null)
+                return arg.ToString();
+            switch(format.ToUpper()) {
+                case "N":
+                return "Name: " + arg;
+                case "P":
+                return "Contact phone: " + arg;
+                case "R":
+                return "Recenue: " + string.Format(_parent, "{0:C}", arg);
+                default:
+                return string.Format(_parent, "{0:" + format + "}", arg);
+            }
         }
-
+        
+        
         public object GetFormat(Type formatType) {
-            return (formatType == typeof(Customer)) ? this : null;
+            return (formatType == typeof(ICustomFormatter)) ? this : null;
         }
     }
 }
